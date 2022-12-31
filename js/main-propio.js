@@ -47,7 +47,6 @@ Funciones validacion
 
 function ValidarFormulario(event) {
   const $formulario = document.querySelector("#carta-a-santa");
-
   const nombre = $formulario.nombre.value;
   const ciudad = $formulario.ciudad.value;
   const descripcionRegalo = $formulario["descripcion-regalo"].value;
@@ -70,27 +69,31 @@ function ValidarFormulario(event) {
 function manejarErrores(errores) {
   const llaves = Object.keys(errores);
   const $errores = document.getElementById("errores");
-  let cantidadErrores = 0;
+  let cantidadErroes = 0;
+
+
+  while ($errores.firstChild) {
+    $errores.removeChild($errores.firstChild);
+  }
 
   llaves.forEach(function (llave) {
     const error = errores[llave];
-
+    
     if (error) {
-      cantidadErrores++;
+      cantidadErroes ++;
       $formulario[llave].className = "error";
 
       const $error = document.createElement("li");
       $error.innerText = error;
-
       $errores.appendChild($error);
+
     } else {
       $formulario[llave].className = "";
-      while ($errores.firstChild) {
-        $errores.removeChild($errores.firstChild);
-      }
     }
+    
   });
-  return cantidadErrores;
+
+  return cantidadErroes;
 }
 
 const $formulario = document.querySelector(`#carta-a-santa`);
