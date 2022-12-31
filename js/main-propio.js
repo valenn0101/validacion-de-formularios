@@ -61,7 +61,12 @@ function ValidarFormulario(event) {
     "descripcion-regalo": errorDescripcionRegalo,
   };
 
-  console.log(manejarErrores(errores));
+  const noErrores = manejarErrores(errores) === 0;
+
+  if(noErrores){
+    $formulario.className = "oculto";
+    document.getElementById("exito").className = "";
+  }
 
   event.preventDefault();
 }
